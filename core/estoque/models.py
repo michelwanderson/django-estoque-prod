@@ -5,6 +5,7 @@ from django.db import models
 # Create your models here.
 class Produto(models.Model):
     nome = models.CharField(max_length=150)
+    categoria = models.CharField(max_length=20, blank=True, null=True) 
     unidade_medida = models.CharField(
         max_length=10,
         choices=[

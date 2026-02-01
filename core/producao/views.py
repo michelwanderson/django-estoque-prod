@@ -37,7 +37,7 @@ def producao(request):
     else:
         form = SaidaProducaoForm()
 
-    produtos = Produto.objects.all()
+    produtos = Produto.objects.all().order_by('categoria', 'nome')
 
     return render(request, 'producao/producao.html', {
         'form': form,

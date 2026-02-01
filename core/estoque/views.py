@@ -11,7 +11,7 @@ from .forms import EntradaEstoqueForm
 
 
 def lista_produtos(request):
-    produtos = Produto.objects.all()
+    produtos = Produto.objects.all().order_by('categoria', 'nome')
     return render(request, 'estoque/lista_produtos.html', {
         'produtos': produtos
     })
