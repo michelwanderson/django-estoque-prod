@@ -1,0 +1,26 @@
+<h2>Entrada de Estoque — Nova Nota Fiscal</h2>
+
+<form method="post">
+    {% csrf_token %}
+
+    <div>
+        <label><strong>Número da Nota Fiscal</strong></label><br>
+        <input type="text" name="numero" placeholder="Ex: 123456" required>
+    </div>
+
+    <br>
+
+    <div>
+        <label><strong>Fornecedor</strong></label><br>
+        <select name="fornecedor" required>
+            <option value="">Selecione o fornecedor</option>
+            {% for f in fornecedores %}
+                <option value="{{ f.id }}">{{ f.nome }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <br>
+
+    <button type="submit">Criar Nota</button>
+</form>

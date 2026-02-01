@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Produção</title>
+</head>
+<body>
+    <h1>Produção - Saída de Produtos</h1>
+
+    <!-- Mensagens -->
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <!-- Formulário de saída -->
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Registrar Saída</button>
+    </form>
+
+    <hr>
+
+    <h2>Estoque Atual</h2>
+    <ul>
+        {% for produto in produtos %}
+            <li>
+                {{ produto.nome }} - Quantidade: {{ produto.quantidade }} {{ produto.unidade_medida }}
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

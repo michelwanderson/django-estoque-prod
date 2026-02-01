@@ -1,0 +1,63 @@
+<h2>Entrada de Estoque</h2>
+
+<p>
+    <strong>Nota Fiscal:</strong> {{ nota.numero }} <br>
+    <strong>Fornecedor:</strong> {{ nota.fornecedor.nome }}
+</p>
+
+<hr>
+
+<h3>Adicionar Produto à Nota</h3>
+
+<form method="post">
+    {% csrf_token %}
+
+    <div>
+        <label><strong>Produto</strong></label><br>
+        <select name="produto" required>
+            <option value="">Selecione o produto</option>
+            {% for p in produtos %}
+                <option value="{{ p.id }}">
+                    {{ p.nome }} ({{ p.unidade_medida }})
+                </option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <br>
+
+    <div>
+        <label><strong>Quantidade</strong></label><br>
+        <input type="number" step="0.01" name="quantidade" required>
+    </div>
+
+        <div>
+        <label><strong>Observação</strong></label><br>
+        <input type="text" name="observacao" required>
+    </div>
+
+    <br>
+
+    <button type="submit">Adicionar Item</button>
+</form>
+
+<hr>
+
+<h3>Itens da Nota</h3>
+
+{% if itens %}
+    <ul>
+        {% for item in itens %}
+            <li>
+                {{ item.produto.nome }} —
+                {{ item.quantidade }} {{ item.produto.unidade_medida }} {{ item.observacao }}
+            </li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'confirmar_nota' nota.id %}">
+        <button>Confirmar Entrada no Estoque</button>
+    </a>
+{% else %}
+    <p>Nenhum item adicionado ainda.</p>
+{% endif %}

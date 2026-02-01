@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Histórico de Movimentações</title>
+</head>
+<body>
+    <h1>Histórico de Movimentações</h1>
+
+    <table border="1">
+        <tr>
+            <th>Data</th>
+            <th>Produto</th>
+            <th>Tipo</th>
+            <th>Quantidade</th>
+            <th>Observação</th>
+        </tr>
+
+        {% for mov in movimentacoes %}
+        <tr>
+            <td>{{ mov.data|date:"d/m/Y H:i" }}</td>
+            <td>{{ mov.produto.nome }}</td>
+            <td>{{ mov.tipo }}</td>
+            <td>{{ mov.quantidade }} {{ mov.produto.unidade_medida }}</td>
+            <td>{{ mov.observacao }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
