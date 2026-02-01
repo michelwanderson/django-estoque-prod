@@ -1,8 +1,11 @@
 from django.shortcuts import render
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from estoque.models import Produto, MovimentacaoEstoque
 from .forms import SaidaProducaoForm
 
+
+@login_required
 def producao(request):
     if request.method == 'POST':
         form = SaidaProducaoForm(request.POST)

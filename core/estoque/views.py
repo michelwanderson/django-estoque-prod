@@ -5,11 +5,13 @@ from django.contrib import messages
 from django.db import transaction
 from django.db.models import Sum
 from decimal import Decimal
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Produto, MovimentacaoEstoque, ItemNotaFiscal, NotaFiscal, Fornecedor
 from .forms import EntradaEstoqueForm
 
 
+@login_required
 def lista_produtos(request):
     produtos = Produto.objects.all().order_by('categoria', 'nome')
     return render(request, 'estoque/lista_produtos.html', {
@@ -17,6 +19,7 @@ def lista_produtos(request):
     })
 
 
+@login_required
 def entrada_estoque(request):
     unidade = None
 
@@ -63,6 +66,7 @@ def entrada_estoque(request):
     })
 
 
+@login_required
 def criar_nota(request):
     fornecedores = Fornecedor.objects.all()
 
@@ -86,6 +90,7 @@ def criar_nota(request):
     })
 
 
+@login_required
 def entrada_nota(request, nota_id):
     nota = get_object_or_404(NotaFiscal, id=nota_id, confirmada=False)
     produtos = Produto.objects.all()
@@ -118,7 +123,7 @@ def entrada_nota(request, nota_id):
 
 
 
-
+@login_required
 def confirmar_nota(request, nota_id):
     nota = get_object_or_404(NotaFiscal, id=nota_id, confirmada=False)
 
@@ -145,7 +150,7 @@ def confirmar_nota(request, nota_id):
 
 
 
-
+@login_required
 def estoque_atual(produto):
     entradas = MovimentacaoEstoque.objects.filter(
         produto=produto,
@@ -160,6 +165,8 @@ def estoque_atual(produto):
     return entradas - saidas
 
 
+
+@login_required
 def saida_producao(request):
     if request.method == 'POST':
         produto_id = request.POST['produto']
@@ -184,6 +191,7 @@ def saida_producao(request):
 
 
 
+@login_required
 def historico(request):
     movimentacoes = MovimentacaoEstoque.objects.select_related('produto', 'nota').all().order_by('-data')
 
