@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Principal</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav>
+        <h2>TESTE - DEV @</h2>
+        <div class="user-info">
+            Bem-vindo, <strong>{{ user.username }}</strong>
+            <a href="/logout/" class="logout-link">Sair</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="hero hero-header">
+            <h1>Painel de Controle</h1>
+            <p>Gerencie seu estoque e produção de forma eficiente.</p>
+        </div>
+
+        <div class="grid">
+            <a href="/estoque/" class="feature-item"><i class="fas fa-boxes"></i><h3>Estoque</h3><p>Visualizar inventário</p></a>
+            <a href="/estoque/entrada/" class="feature-item"><i class="fas fa-truck-loading"></i><h3>Entrada</h3><p>Registrar via Nota Fiscal</p></a>
+            <a href="/producao/" class="feature-item"><i class="fas fa-industry"></i><h3>Produção</h3><p>Saída para consumo</p></a>
+            <a href="/estoque/historico" class="feature-item"><i class="fas fa-history"></i><h3>Histórico</h3><p>Log de movimentações</p></a>
+        </div>
+    </div>
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

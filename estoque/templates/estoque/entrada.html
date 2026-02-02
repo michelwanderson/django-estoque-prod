@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrada de Estoque</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav>
+        <h2><a href="/">MoltBolt</a></h2>
+        <div class="user-info">
+            <a href="/" style="margin-right: 15px;">Voltar ao Menu</a>
+            <a href="/logout/" class="logout-link">Sair</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="hero">
+            <h2>Entrada de Produtos (NF)</h2>
+            
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="cta-button">Registrar Entrada</button>
+            </form>
+
+            {% if nota %}
+                <hr>
+                <h3>Itens na Nota {{ nota.numero }}</h3>
+                <ul class="item-list">
+                    {% for item in itens %}
+                        <li>
+                            <div style="flex-grow: 1;">
+                                <strong>{{ item.produto.nome }}</strong> 
+                                <span>{{ item.quantidade }} {{ item.produto.unidade_medida }}</span>
+                            </div>
+                            <a href="{% url 'excluir_item_nota' item.id %}" title="Excluir item" style="margin-left: 1rem; text-decoration: none;">
+                                <i class="fas fa-trash-alt" style="color: #e74c3c;"></i>
+                            </a>
+                        </li>
+                    {% empty %}
+                        <li><p>Nenhum item adicionado ainda.</p></li>
+                    {% endfor %}
+                </ul>
+                
+                <a href="{% url 'confirmar_nota' nota.id %}" class="cta-button btn-secondary" style="margin-top: 1rem;">Finalizar e Confirmar Nota</a>
+            {% endif %}
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const produtosMap = {{ produtos_map|safe }};
+            const produtoSelect = document.getElementById('id_produto');
+            const codBarrasInput = document.getElementById('id_cod_barras');
+
+            if (produtoSelect && codBarrasInput) {
+                produtoSelect.addEventListener('change', function() {
+                    const produtoId = this.value;
+                    if (produtosMap[produtoId]) {
+                        codBarrasInput.value = produtosMap[produtoId];
+                    } else {
+                        codBarrasInput.value = '';
+                    }
+                });
+            }
+        });
+    </script>
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

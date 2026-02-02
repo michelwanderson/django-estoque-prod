@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Estoque</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <h1>Estoque - Produtos</h1>
+
+    <ul>
+        {% for produto in produtos %}
+            <li>
+                {{ produto.nome }} - Quantidade: {{ produto.quantidade }} -  {{ produto.unidade_medida }}
+            </li>
+        {% empty %}
+            <li>Nenhum produto cadastrado.</li>
+        {% endfor %}
+    </ul>
+    <script src="/static/js/script.js"></script>
+</body>
+</html>

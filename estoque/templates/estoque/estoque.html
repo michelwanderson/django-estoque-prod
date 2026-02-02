@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estoque</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav>
+        <h2><a href="/">MoltBolt</a></h2>
+        <div class="user-info">
+            <a href="/menu/" style="margin-right: 15px;">Voltar ao Menu</a>
+            <a href="/logout/" class="logout-link">Sair</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="hero">
+            <center><h2>Inventário de Estoque</h2></center>
+            
+            <form method="get" style="margin-bottom: 1.5rem;">
+                <select name="categoria" onchange="this.form.submit()" style="max-width: 300px;">
+                    <option value="">Todas as Categorias</option>
+                    {% for cat in categorias %}
+                        <option value="{{ cat }}" {% if categoria_filtro == cat %}selected{% endif %}>{{ cat }}</option>
+                    {% endfor %}
+                </select>
+            </form>
+
+            <ul class="item-list">
+                {% for produto in produtos %}
+                    <li>
+                        <strong>{{ produto.nome }} </strong>
+                        <strong>{{ produto.categoria }}</strong>
+                        <strong>{{ produto.cod_barras }}</strong>
+                        <span>{{ produto.quantidade }} {{ produto.unidade_medida }}</span>
+                    </li>
+                {% empty %}
+                    <li><p>Nenhum produto cadastrado.</p></li>
+                {% endfor %}
+            </ul>
+            
+            <div class="button-group">
+                <a href="/estoque/entrada/" class="cta-button"><i class="fas fa-plus"></i> Nova Entrada</a>
+                <a href="/producao/" class="cta-button btn-secondary"><i class="fas fa-minus"></i> Saída / Produção</a>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>
