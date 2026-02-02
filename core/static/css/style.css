@@ -1,0 +1,159 @@
+/* Reset & Base */
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f4f7f6;
+    color: #2d3748;
+}
+
+/* Login Page Specifics */
+body.login-page {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Navigation */
+nav {
+    background: white;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+nav h2 { margin: 0; color: #333; font-size: 1.4rem; }
+nav a { text-decoration: none; color: inherit; transition: transform 0.2s; display: inline-block; }
+.user-info { color: #666; font-size: 0.95rem; }
+.logout-link { color: #e74c3c; font-weight: 600; margin-left: 10px; }
+
+/* Layout */
+.container {
+    max-width: 1000px;
+    margin: 3rem auto;
+    padding: 0 1.5rem;
+}
+
+/* Hero / Card Section */
+.hero {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    width: 100%;
+    box-sizing: border-box;
+}
+.login-page .hero {
+    max-width: 400px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+.hero-header {
+    background: transparent;
+    box-shadow: none;
+    margin-bottom: 2.5rem;
+    text-align: center;
+    padding: 0;
+}
+.hero-header h1 { color: #2d3748; margin-bottom: 0.5rem; }
+.hero-header p { color: #718096; }
+
+/* Forms */
+.form-group, p { margin-bottom: 1.2rem; text-align: left; }
+label { display: block; margin-bottom: 0.5rem; color: #555; font-weight: 600; font-size: 0.9rem; }
+input, select {
+    width: 100%; padding: 0.8rem; border: 1px solid #ddd;
+    border-radius: 6px; box-sizing: border-box; font-size: 1rem;
+    transition: border-color 0.3s;
+}
+input:focus, select:focus { border-color: #764ba2; outline: none; }
+
+/* Buttons */
+.cta-button, button[type="submit"] {
+    width: 100%; padding: 0.9rem; background-color: #764ba2;
+    color: white; border: none; border-radius: 6px; font-size: 1rem; font-weight: 600;
+    cursor: pointer; margin-top: 1rem; transition: transform 0.2s;
+    display: block; text-align: center; text-decoration: none;
+}
+
+/* .cta-button-inventario-entrada, button[type="submit"] {
+    width: 100%; padding: 0.9rem; background-color: #60bd3e;
+    color: white; border: none; border-radius: 6px; font-size: 1rem; font-weight: 600;
+    cursor: pointer; margin-top: 1rem; transition: transform 0.2s;
+    display: block; text-align: center; text-decoration: none;
+}*/
+
+
+
+
+.cta-button:hover { transform: translateY(-2px); }
+
+.button-group {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.btn-secondary {
+    background-color: #5a67d8;
+}
+
+
+/* Grid & Features */
+.grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem;
+}
+.feature-item {
+    background: white; padding: 2rem; border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05); text-align: center;
+    text-decoration: none; color: #4a5568; display: block;
+    border: 1px solid #e2e8f0; transition: transform 0.2s, box-shadow 0.2s;
+}
+.feature-item:hover {
+    transform: translateY(-5px); box-shadow: 0 10px 15px rgba(0,0,0,0.1); border-color: #cbd5e0;
+}
+.feature-item h3 { margin-top: 0; color: #5a67d8; font-size: 1.25rem; }
+.feature-item i { font-size: 2.5rem; color: #764ba2; margin-bottom: 1rem; display: block; }
+.feature-item p { font-size: 0.9rem; color: #718096; }
+
+/* Lists (e.g. Estoque) */
+.item-list { list-style: none; padding: 0; }
+.item-list li {
+    background: white; padding: 1rem; margin-bottom: 0.5rem;
+    border-radius: 6px; border: 1px solid #e2e8f0;
+    display: flex; justify-content: space-between; align-items: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.item-list li:hover {
+    transform: translateX(5px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    border-color: #cbd5e0;
+}
+
+/* Messages */
+.error-msg, .messages li {
+    color: #e74c3c; font-size: 0.9rem; margin-top: 1rem;
+    background: #fdecea; padding: 0.5rem; border-radius: 4px; list-style: none;
+}
+
+.success-msg, .messages li {
+    color: #3a38dd; font-size: 0.9rem; margin-top: 1rem;
+    background: #07ff1d; padding: 0.5rem; border-radius: 4px; list-style: none;
+}
+
+h2 { color: #333; margin-bottom: 1.5rem; margin-top: 0; }
+hr { border: 0; border-top: 1px solid #e2e8f0; margin: 2rem 0; }
+
+
+.entrada {
+    font-weight: bold;
+    color: #2ecc71;
+}
+
+.saida {
+    font-weight: bold;
+    color: #e74c3c;
+}

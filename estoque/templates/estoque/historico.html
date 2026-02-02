@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Histórico</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav>
+        <h2><a href="/">MoltBolt</a></h2>
+        <div class="user-info">
+            <a href="/menu/" style="margin-right: 15px;">Voltar ao Menu</a>
+            <a href="/logout/" class="logout-link">Sair</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="hero">
+            <h2>Histórico de Movimentações</h2>
+            <ul class="item-list">
+                {% for item in movimentacoes %}
+                    <li>
+                        <div style="flex: 1; padding-right: 15px;">
+                            <strong>{{ item.produto.nome }}</strong>
+                            <br>
+                            <small style="color: #718096;">
+                                <i class="far fa-clock"></i> {{ item.data|date:"d/m/Y H:i" }}
+                                {% if item.usuario %}
+                                    &nbsp;|&nbsp; <i class="far fa-user"></i> {{ item.usuario.username }}
+                                {% endif %}
+                            </small>
+                            {% if item.observacao %}
+                                <div style="margin-top: 5px; font-size: 0.9rem; color: #555; font-style: italic;">Obs: {{ item.observacao }}</div>
+                            {% endif %}
+                        </div>
+                        <div style="text-align: right;">
+                            <!-- <span style="font-weight: bold; color: {% if item.tipo == 'E' %}#2ecc71{% else %}#e74c3c{% endif %};">
+                                {{ item.get_tipo_display|default:item.tipo }}
+                            </span> -->
+                            <span class="{% if item.tipo == 'E' %}entrada{% else %}saida{% endif %}">
+                                {{ item.get_tipo_display }}
+                            </span>
+
+                            <br>
+                            <span>{{ item.quantidade }} {{ item.produto.unidade_medida }}</span>
+                        </div>
+                    </li>
+                {% empty %}
+                    <li><p>Nenhum registro de histórico encontrado.</p></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>
